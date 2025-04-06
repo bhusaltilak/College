@@ -1,0 +1,24 @@
+﻿@model COLLEGE.Models.ViewModels.StudentFeeViewModel
+
+<h2>Fee Details</h2>
+
+<div class="card p-3">
+    <dl class="row">
+        <dt class="col-sm-3">Student Name</dt>
+        <dd class="col-sm-9">@Model.StudentName</dd>
+
+        <dt class="col-sm-3">Grade</dt>
+        <dd class="col-sm-9">@Model.Grade</dd>
+
+        <dt class="col-sm-3">Month</dt>
+        <dd class="col-sm-9">@Model.Month</dd>
+
+        <dt class="col-sm-3">Amount</dt>
+        <dd class="col-sm-9">@Model.Amount</dd>
+
+        <dt class="col-sm-3">Amount Status</dt>
+        <dd class="col-sm-9">@Model.AmountStatus</dd>
+    </dl>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Back to List</a>

@@ -1,0 +1,26 @@
+﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
+
+@{
+    ViewData["Title"] = "Teacher Details";
+}
+
+<div class="container mt-4">
+    <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="max-width: 600px;">
+        <div class="row g-0">
+            <div class="col-md-4 text-center">
+                <img src="@(!string.IsNullOrEmpty(Model.PhotoPath) ? Model.PhotoPath : "/Images/default-user.png")"
+                     class="img-fluid rounded-circle mt-3"
+                     alt="Teacher Photo"
+                     style="width: 150px; height: 150px; object-fit: cover;" />
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h4 class="card-title">@Model.TeacherName</h4>
+                    <p class="card-text"><strong>Subject:</strong> @Model.Subject</p>
+                    <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Active" : "Inactive")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

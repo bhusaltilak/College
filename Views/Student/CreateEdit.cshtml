@@ -1,0 +1,59 @@
+﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
+
+@{
+    bool isEdit = Model.StudentId != 0;
+    ViewData["Title"] = isEdit ? "Edit Student" : "Create Student";
+}
+
+<h2 class="mb-3">@ViewData["Title"]</h2>
+
+<form asp-action="CreateEdit" method="post" enctype="multipart/form-data">
+    <input type="hidden" asp-for="StudentId" />
+    <input type="hidden" asp-for="ParentId" />
+
+    <div class="form-group mb-3">
+        <label asp-for="StudentName" class="form-label"></label>
+        <input asp-for="StudentName" class="form-control" />
+        <span asp-validation-for="StudentName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Address" class="form-label"></label>
+        <input asp-for="Address" class="form-control" />
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Grade" class="form-label"></label>
+        <input asp-for="Grade" class="form-control" type="number" />
+        <span asp-validation-for="Grade" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="ParentName" class="form-label"></label>
+        <input asp-for="ParentName" class="form-control" />
+        <span asp-validation-for="ParentName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Phone" class="form-label"></label>
+        <input asp-for="Phone" class="form-control" type="number" />
+        <span asp-validation-for="Phone" class="text-danger"></span>
+    </div>
+
+    <div class="form-group mb-3">
+        <label asp-for="Photo" class="form-label"></label>
+        <input asp-for="Photo" class="form-control" type="file" />
+        <span asp-validation-for="Photo" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">@ViewData["Title"]</button>
+    <a asp-action="Index" class="btn btn-secondary ms-2">Back to List</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

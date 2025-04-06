@@ -1,0 +1,28 @@
+﻿@model List<COLLEGE.Models.ViewModels.DetailsViewModel>
+
+@if (!Model.Any())
+{
+    <p>No student records available.</p>
+}
+else
+{
+    <div class="list-group">
+        @foreach (var student in Model)
+        {
+            <div class="list-group-item list-group-item-action flex-column align-items-start mb-1 shadow-sm rounded">
+                <div class="col-md-2">
+                    <img src="@(string.IsNullOrEmpty(student.PhotoPath) ? "/Images/default-user.png" : student.PhotoPath)"
+                         class="img-fluid rounded-start"
+                         alt="Student Photo" />
+                </div>
+                <h5 class="mb-1">@student.StudentName</h5>
+                <p class="mb-1"><strong>Grade:</strong> @student.Grade</p>
+                <p class="mb-1"><strong>Address:</strong> @student.Address</p>
+                <p class="mb-1"><strong>Parent Name:</strong> @student.ParentName</p>
+                <p class="mb-1"><strong>Phone:</strong> @student.Phone</p>
+               
+                
+            </div>
+        }
+    </div>
+}
