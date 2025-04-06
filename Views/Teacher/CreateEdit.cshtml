@@ -1,0 +1,39 @@
+﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
+
+@{
+    var isEdit = Model.TeacherId != 0;
+    ViewData["Title"] = isEdit ? "Edit Teacher" : "Add Teacher";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<form asp-action="CreateEdit" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <input type="hidden" asp-for="TeacherId" />
+
+    <div class="form-group">
+        <label asp-for="TeacherName"></label>
+        <input asp-for="TeacherName" class="form-control" />
+        <span asp-validation-for="TeacherName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Subject"></label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">@((isEdit ? "Update" : "Create"))</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+   
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

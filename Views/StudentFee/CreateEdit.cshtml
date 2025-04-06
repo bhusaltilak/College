@@ -1,0 +1,47 @@
+﻿@model COLLEGE.Models.ViewModels.StudentFeeFormViewModel
+
+<h2>Create/Edit Student Fees</h2>
+
+<form asp-action="CreateEdit" method="post">
+    <table class="table" id="feeTable">
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Grade</th>
+                <th>Month</th>
+                <th>Amount</th>
+                <th>Amount Status</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="feeBody">
+            @for (int i = 0; i < Model.Fees.Count; i++)
+            {
+                <tr>
+                    <input type="hidden" name="Fees[@i].Id" value="@Model.Fees[i].Id" />
+                    <td><input name="Fees[@i].StudentName" class="form-control" value="@Model.Fees[i].StudentName" /></td>
+                    <td><input name="Fees[@i].Grade" class="form-control" value="@Model.Fees[i].Grade" /></td>
+                    <td><input name="Fees[@i].Month" class="form-control" value="@Model.Fees[i].Month" /></td>
+                    <td><input name="Fees[@i].Amount" class="form-control" type="number" value="@Model.Fees[i].Amount" /></td>
+                    <td>
+                        <select name="Fees[@i].AmountStatus" class="form-control">
+                            <option value="Unpaid" selected="@(Model.Fees[i].AmountStatus == "Unpaid")">Unpaid</option>
+                            <option value="Paid" selected="@(Model.Fees[i].AmountStatus == "Paid")">Paid</option>
+                        </select>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <button type="button" class="btn btn-secondary" onclick="addRow()">Add Row</button>
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>
+
+
+    <script src="~/js/studentfee.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
