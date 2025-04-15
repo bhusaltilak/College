@@ -68,7 +68,7 @@ namespace COLLEGE.Controllers
                    
                 }
                 catch (Exception ex)
-                {
+                {    
                     Console.WriteLine(" File Upload Error: " + ex.Message);
                 }
             }
