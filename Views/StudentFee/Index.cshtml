@@ -24,6 +24,7 @@
                 <td>@fee.AmountStatus</td>
                 <td>
                     <a asp-action="CreateEdit" asp-route-id="@fee.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Details" asp-route-id="@fee.Id" class="btn btn-info btn-sm">Details</a>
 
                     <form asp-action="Delete" asp-route-id="@fee.Id" method="post"
                           style="display:inline-block;"

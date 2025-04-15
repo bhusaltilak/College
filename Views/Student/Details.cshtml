@@ -1,26 +1,29 @@
 ﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
 
 @{
-    ViewData["Title"] = "Teacher Details";
+    ViewData["Title"] = "Student Details";
 }
 
-<div class="container mt-4">
-    <div class="card shadow-lg p-3 mb-5 bg-white rounded" style="max-width: 600px;">
-        <div class="row g-0">
-            <div class="col-md-4 text-center">
-                <img src="@(!string.IsNullOrEmpty(Model.PhotoPath) ? Model.PhotoPath : "/Images/default-user.png")"
-                     class="img-fluid rounded-circle mt-3"
-                     alt="Teacher Photo"
-                     style="width: 150px; height: 150px; object-fit: cover;" />
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h4 class="card-title">@Model.TeacherName</h4>
-                    <p class="card-text"><strong>Subject:</strong> @Model.Subject</p>
-                    <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Active" : "Inactive")</p>
-                </div>
+<div class="card shadow mb-4">
+    <div class="row g-0">
+        <div class="col-md-4">
+            <img src="@Model.PhotoPath" class="img-fluid rounded-start" alt="Photo" />
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h3 class="card-title">@Model.StudentName</h3>
+                <p class="card-text"><strong>Grade:</strong> @Model.Grade</p>
+                <p class="card-text"><strong>Address:</strong> @Model.Address</p>
+                <p class="card-text"><strong>Status:</strong> @(Model.Status ? "Active" : "Inactive")</p>
+
+                <hr />
+                <h5 class="mt-3">Parent Information</h5>
+                <p class="card-text"><strong>Parent Name:</strong> @Model.ParentName</p>
+                <p class="card-text"><strong>Phone:</strong> @Model.Phone</p>
+
+                <a asp-action="Index1" class="btn btn-secondary mt-3">Back to List</a>
             </div>
         </div>
     </div>
-    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
 </div>
+

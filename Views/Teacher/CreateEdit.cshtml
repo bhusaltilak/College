@@ -1,43 +1,24 @@
-﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
+﻿@model COLLEGE.Models.ViewModels.TeacherViewModel
+
+
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 @{
-    var isEdit = Model.TeacherId != 0;
-    ViewData["Title"] = isEdit ? "Edit Teacher" : "Add Teacher";
+    ViewData["Title"] = Model.TeacherId == 0 ? "Add Teacher" : "Edit Teacher";
 }
 
 <h2>@ViewData["Title"]</h2>
 
-<form asp-action="CreateEdit" method="post" enctype="multipart/form-data">
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@using (Html.BeginForm("CreateEdit", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
-    <input type="hidden" asp-for="TeacherId" />
+{
+    @Html.HiddenFor(m => m.TeacherId)
 
-    <div class="form-group">
-        <label asp-for="TeacherName"></label>
-        <input asp-for="TeacherName" class="form-control" />
-        <span asp-validation-for="TeacherName" class="text-danger"></span>
-    </div>
+    @await Html.PartialAsync("_TeacherCreateEditPartial", Model)
 
-    <div class="form-group">
-        <label asp-for="Subject"></label>
-        <input asp-for="Subject" class="form-control" />
-        <span asp-validation-for="Subject" class="text-danger"></span>
-    </div>
-    <div class="form-group mb-3">
-        <label asp-for="Photo" class="form-label"></label>
-        <input asp-for="Photo" class="form-control" type="file" />
-        <span asp-validation-for="Photo" class="text-danger"></span>
-    </div>
+    <button type="submit" class="btn btn-success">Save</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
 
-    <button type="submit" class="btn btn-primary">@((isEdit ? "Update" : "Create"))</button>
-    <a asp-action="Index" class="btn btn-secondary">Back</a>
-
-   
-</form>
-
-@section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+  
 }
+

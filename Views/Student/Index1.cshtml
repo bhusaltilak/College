@@ -1,0 +1,25 @@
+﻿@model List<COLLEGE.Models.ViewModels.DetailsViewModel>
+
+@{
+    ViewData["Title"] = "Student List";
+    var formModel = ViewBag.Form as COLLEGE.Models.ViewModels.DetailsViewModel ?? new COLLEGE.Models.ViewModels.DetailsViewModel();
+}
+
+<h2>Manage Students</h2>
+
+
+<div class="row">
+    <div class="col-md-5">
+        @await Html.PartialAsync("~/Views/Shared/_StudentCreateEditPartial.cshtml", formModel)
+    </div>
+
+  
+
+    <div class="col-md-9 mt-5">
+        @await Html.PartialAsync("~/Views/Shared/_StudentListPartial.cshtml", Model)
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

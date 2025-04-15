@@ -1,0 +1,34 @@
+﻿@model IEnumerable<COLLEGE.Models.ViewModels.TeacherViewModel>
+
+<table class="table table-bordered" style="width:100%">
+    <thead class="table-dark">
+        <tr>
+            <th>Photo</th>  
+            <th>Name</th>
+            <th>Subject</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var t in Model)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(t.PhotoPath))
+                    {
+                        <img src="@t.PhotoPath" style="height: 50px;" />
+                    }
+                </td>
+                <td>@t.TeacherName</td>
+                <td>@t.Subject</td>
+                <td>
+                    <a asp-action="CreateEdit" asp-route-id="@t.TeacherId" class="btn btn-warning btn-sm">Edit</a>
+                    <a asp-action="Details" asp-route-id="@t.TeacherId" class="btn btn-sm btn-info">Details</a>
+                    <form asp-action="Delete" asp-route-id="@t.TeacherId" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -36,62 +36,57 @@ namespace COLLEGE.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateEdit(int? id)
         {
-
             if (id == null || id == 0)
-                return View(new DetailsViewModel());    //Create Mode
+                return View(new TeacherViewModel());
 
             var teacher = await _teacherRepository.GetByIdAsync(id.Value);
-            if(teacher== null) 
-                return NotFound(); 
-
-            return View(teacher);  //Edit
-
+            return View(teacher);
         }
-
         [HttpPost]
-            public async Task<IActionResult>CreateEdit(DetailsViewModel model)
+        public async Task<IActionResult> CreateEdit(TeacherViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(model);
+           
 
-            try
+            if (!ModelState.IsValid)
             {
                
+                return View(model);
+            }
 
-                if (model.Photo != null && model.Photo.Length > 0)
+            // File Upload
+            if (model.Photo != null && model.Photo.Length > 0)
+            {
+                try
                 {
-                    string uploadFolder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Teacher");
-
-                    if (!Directory.Exists(uploadFolder))
-                        Directory.CreateDirectory(uploadFolder);
-
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + Path.GetFileName(model.Photo.FileName);
-                    string filePath = Path.Combine(uploadFolder, uniqueFileName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await model.Photo.CopyToAsync(stream);
-                    }
-
-
-                    model.PhotoPath = "/Images/Teacher/" + uniqueFileName;
-
-                    Console.WriteLine("✅ Assigned PhotoPath: " + model.PhotoPath);
+                    string folder = Path.Combine(_webHostEnvironment.WebRootPath, "Images", "Teacher");
+                    Directory.CreateDirectory(folder);
+                    string filename = Guid.NewGuid() + "_" + model.Photo.FileName;
+                    string filepath = Path.Combine(folder, filename);
+                    using var fs = new FileStream(filepath, FileMode.Create);
+                    await model.Photo.CopyToAsync(fs);
+                    model.PhotoPath = "/Images/Teacher/" + filename;
+                   
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(" File Upload Error: " + ex.Message);
                 }
             }
-            catch (Exception ex)
-            {
-                Console.WriteLine("❌ File Upload Error: " + ex.Message);
-            }
-
 
             if (model.TeacherId == 0)
+            {
+              
                 await _teacherRepository.CreateAsync(model);
+            }
             else
+            {
+              
                 await _teacherRepository.UpdateAsync(model);
+            }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
+
 
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
@@ -101,7 +96,7 @@ namespace COLLEGE.Controllers
                 return NotFound();
 
             TempData["Success"] = "Teacher deleted successfully!";
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Index");
         }
     }
     

@@ -16,11 +16,11 @@ namespace COLLEGE.Repository
         }
 
 
-        public async Task<IEnumerable<DetailsViewModel>> GetAllAsync()
+        public async Task<IEnumerable<TeacherViewModel>> GetAllAsync()
         {
             return await _context.Teachers
                 .Where(t=>t.Status==true)
-            .Select(t => new DetailsViewModel
+            .Select(t => new TeacherViewModel
             {
                 TeacherId = t.TeacherId,
                 TeacherName = t.TeacherName,
@@ -32,12 +32,12 @@ namespace COLLEGE.Repository
             .ToListAsync();
         }
 
-        public async Task<DetailsViewModel> GetByIdAsync(int id)
+        public async Task<TeacherViewModel> GetByIdAsync(int id)
         {
 
             return await _context.Teachers
                 .Where(t => t.TeacherId == id && t.Status == true)
-                .Select(t => new DetailsViewModel
+                .Select(t => new TeacherViewModel
                 {
                     TeacherId = t.TeacherId,
                     TeacherName = t.TeacherName,
@@ -49,21 +49,25 @@ namespace COLLEGE.Repository
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> CreateAsync(DetailsViewModel model)
+        public async Task<bool> CreateAsync(TeacherViewModel model)
         {
+            Console.WriteLine("🛠 CreateAsync() called");
+
             var teacher = new Teacher
             {
                 TeacherName = model.TeacherName,
                 Subject = model.Subject,
                 PhotoPath = model.PhotoPath,
-                Status = true,
-               
+                Status = true
             };
+
             _context.Teachers.Add(teacher);
-            return await _context.SaveChangesAsync() > 0;
+            var result = await _context.SaveChangesAsync();
+            Console.WriteLine("✅ Save result: " + result);
+            return result > 0;
         }
 
-        public async Task<bool> UpdateAsync(DetailsViewModel model)
+        public async Task<bool> UpdateAsync(TeacherViewModel model)
         {
             var teacher = await _context.Teachers.FindAsync(model.TeacherId);
             if (teacher == null || teacher.Status==false) return false;

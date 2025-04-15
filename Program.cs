@@ -1,4 +1,5 @@
 using COLLEGE.Data;
+using COLLEGE.Filters;
 using COLLEGE.Repository;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,13 +7,22 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddControllersWithViews(options =>
+{
+    options.Filters.Add<AdminOnlyAttribute>();
+}).AddRazorRuntimeCompilation();
 
 builder.Services.AddDbContext<CollegeDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<ITeacherRepository, TeacherRepository>();
 builder.Services.AddScoped<IStudentRepository, StudentRepository>();
 builder.Services.AddScoped<IStudentFeeRepository, StudentFeeRepository>();
+
+
+
+
+builder.Services.AddSession();
+
 
 
 var app = builder.Build();
@@ -25,10 +35,18 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+
+
+
+
+
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
+
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
