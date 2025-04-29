@@ -7,6 +7,7 @@
 
 <h2 class="mb-3">@ViewData["Title"]</h2>
 
+<<<<<<< HEAD
 
 
 
@@ -14,6 +15,9 @@
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
+=======
+<form asp-action="CreateEdit" method="post" enctype="multipart/form-data">
+>>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
     <input type="hidden" asp-for="StudentId" />
     <input type="hidden" asp-for="ParentId" />
 
@@ -62,4 +66,8 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5

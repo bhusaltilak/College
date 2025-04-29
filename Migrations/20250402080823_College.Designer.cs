@@ -3,6 +3,7 @@ using COLLEGE.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace COLLEGE.Migrations
 {
     [DbContext(typeof(CollegeDbContext))]
-    partial class CollegeDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250402080823_College")]
+    partial class College
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -60,12 +63,6 @@ namespace COLLEGE.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
-                    b.Property<string>("PhotoPath")
-                        .HasColumnType("nvarchar(max)");
-
-=======
->>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 
@@ -118,12 +115,6 @@ namespace COLLEGE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
 
-<<<<<<< HEAD
-                    b.Property<string>("PhotoPath")
-                        .HasColumnType("nvarchar(max)");
-
-=======
->>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
                     b.Property<bool>("Status")
                         .HasColumnType("bit");
 

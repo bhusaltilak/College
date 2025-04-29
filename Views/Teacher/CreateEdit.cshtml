@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model COLLEGE.Models.ViewModels.TeacherViewModel
 
 
@@ -5,10 +6,18 @@
 
 @{
     ViewData["Title"] = Model.TeacherId == 0 ? "Add Teacher" : "Edit Teacher";
+=======
+﻿@model COLLEGE.Models.ViewModels.DetailsViewModel
+
+@{
+    var isEdit = Model.TeacherId != 0;
+    ViewData["Title"] = isEdit ? "Edit Teacher" : "Add Teacher";
+>>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
 }
 
 <h2>@ViewData["Title"]</h2>
 
+<<<<<<< HEAD
 @using (Html.BeginForm("CreateEdit", "Teacher", FormMethod.Post, new { enctype = "multipart/form-data" }))
 
 {
@@ -22,3 +31,35 @@
   
 }
 
+=======
+<form asp-action="CreateEdit" method="post">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <input type="hidden" asp-for="TeacherId" />
+
+    <div class="form-group">
+        <label asp-for="TeacherName"></label>
+        <input asp-for="TeacherName" class="form-control" />
+        <span asp-validation-for="TeacherName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Subject"></label>
+        <input asp-for="Subject" class="form-control" />
+        <span asp-validation-for="Subject" class="text-danger"></span>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">@((isEdit ? "Update" : "Create"))</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+   
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+>>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
