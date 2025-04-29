@@ -1,12 +1,19 @@
 ﻿@model IEnumerable<COLLEGE.Models.ViewModels.TeacherViewModel>
 
+@{
+    bool isAdmin = ViewData["IsAdmin"] != null && (bool)ViewData["IsAdmin"];
+}
+
 <table class="table table-bordered" style="width:100%">
     <thead class="table-dark">
         <tr>
             <th>Photo</th>  
             <th>Name</th>
             <th>Subject</th>
-            <th>Actions</th>
+             @if (isAdmin)
+            {
+                <th>Actions</th>
+            }
         </tr>
     </thead>
     <tbody>
@@ -21,6 +28,9 @@
                 </td>
                 <td>@t.TeacherName</td>
                 <td>@t.Subject</td>
+                 @if (isAdmin)
+                {
+                  
                 <td>
                     <a asp-action="CreateEdit" asp-route-id="@t.TeacherId" class="btn btn-warning btn-sm">Edit</a>
                     <a asp-action="Details" asp-route-id="@t.TeacherId" class="btn btn-sm btn-info">Details</a>
@@ -28,6 +38,7 @@
                         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                     </form>
                 </td>
+                }
             </tr>
         }
     </tbody>

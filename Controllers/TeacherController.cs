@@ -21,6 +21,7 @@ namespace COLLEGE.Controllers
         public async Task<IActionResult> Index()
         {
             var teachers = await _teacherRepository.GetAllAsync();
+            ViewBag.IsAdmin = HttpContext.Session.GetString("IsAdmin") == "true";
             return View(teachers);
 
         }
@@ -36,6 +37,9 @@ namespace COLLEGE.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateEdit(int? id)
         {
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+                return Unauthorized();
+
             if (id == null || id == 0)
                 return View(new TeacherViewModel());
 
@@ -45,7 +49,9 @@ namespace COLLEGE.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateEdit(TeacherViewModel model)
         {
-           
+
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+                return Unauthorized();
 
             if (!ModelState.IsValid)
             {
@@ -91,6 +97,9 @@ namespace COLLEGE.Controllers
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
+
+            if (HttpContext.Session.GetString("IsAdmin") != "true")
+                return Unauthorized();
             var result = await _teacherRepository.DeleteAsync(id);
             if(!result)
                 return NotFound();

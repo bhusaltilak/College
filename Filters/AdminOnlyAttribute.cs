@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System;
 
 namespace COLLEGE.Filters
 {
@@ -10,12 +12,14 @@ namespace COLLEGE.Filters
             var session = context.HttpContext.Session;
             var isAdmin = session.GetString("IsAdmin");
 
-            // ❗ Exclude Login and AccountController
+            //  Exclude Login and AccountController
             var controller = context.RouteData.Values["controller"]?.ToString()?.ToLower();
             var action = context.RouteData.Values["action"]?.ToString()?.ToLower();
+        
 
-            if (controller == "account" && (action == "login" || action == "logout"))
+                if (controller == "account" && (action == "login" || action == "logout"))
             {
+
                
                 return;
             }

@@ -2,15 +2,29 @@
 
 @{
     ViewData["Title"] = "Teacher List";
+    bool isAdmin = ViewBag.IsAdmin ?? false;
 }
 
 <h2>Teacher List</h2>
 
-<a asp-action="CreateEdit" class="btn btn-primary mb-3">Add Teacher</a>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">@TempData["Success"]</div>
+}
+
+@if (isAdmin)
+{
+    <a asp-action="CreateEdit" class="btn btn-primary mb-3">Add Teacher</a>
+}
+
+@{
+    ViewData["IsAdmin"] = isAdmin;
+}
+
 
 <div class="row">
 
     <div class="col-md-9 mt-5">
-        @await Html.PartialAsync("~/Views/Shared/_TeacherListPartial.cshtml", Model)
+        @await Html.PartialAsync("~/Views/Shared/_TeacherListPartial.cshtml", Model, ViewData)
     </div>
 </div>
