@@ -15,14 +15,11 @@ namespace COLLEGE.Repository
             _context = context;
         }
 
-
-<<<<<<< HEAD
         public async Task<IEnumerable<TeacherViewModel>> GetAllAsync()
         {
             return await _context.Teachers
                 .Where(t => t.Status == true)
             .Select(t => new TeacherViewModel
-=======
         public async Task<IEnumerable<DetailsViewModel>> GetAllAsync()
         {
             return await _context.Teachers
@@ -33,10 +30,9 @@ namespace COLLEGE.Repository
                 TeacherId = t.TeacherId,
                 TeacherName = t.TeacherName,
                 Subject = t.Subject,
-<<<<<<< HEAD
+
                 PhotoPath = t.PhotoPath,
-=======
->>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
+
                 Status = true,
 
             })
