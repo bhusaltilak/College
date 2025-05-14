@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using COLLEGE.Models.ViewModels;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
-<<<<<<< HEAD
+//
 using COLLEGE.Models.DbEntities;
 using Microsoft.AspNetCore.Mvc.Filters;
 =======
@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace COLLEGE.Controllers
 {
-<<<<<<< HEAD
+//
 
 =======
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
@@ -20,7 +20,7 @@ namespace COLLEGE.Controllers
     {
         private readonly IStudentRepository _studentRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
-<<<<<<< HEAD
+//
         public StudentController(IStudentRepository studentRepository, IWebHostEnvironment webHostEnvironment)
 =======
         public StudentController(IStudentRepository studentRepository , IWebHostEnvironment webHostEnvironment)
@@ -33,7 +33,7 @@ namespace COLLEGE.Controllers
 
 
 
-<<<<<<< HEAD
+//
 =======
         public async Task <IActionResult> ListPartial()
         {
@@ -48,7 +48,7 @@ namespace COLLEGE.Controllers
             return View(students);
         }
 
-<<<<<<< HEAD
+//
 
         //[HttpGet]
         //public async Task<IActionResult> Details(int id)
@@ -176,7 +176,7 @@ namespace COLLEGE.Controllers
         public async Task<IActionResult> CreateEdit(DetailsViewModel model)
         {
             if (!ModelState.IsValid)
-<<<<<<< HEAD
+//
             {
 
                 var students = await _studentRepository.GetAllAsync();
@@ -204,7 +204,7 @@ namespace COLLEGE.Controllers
                         await model.Photo.CopyToAsync(stream);
                     }
 
-<<<<<<< HEAD
+//
                     model.PhotoPath = "/Images/Students/" + uniqueFileName;
 =======
                   
@@ -220,7 +220,7 @@ namespace COLLEGE.Controllers
             }
 
             if (model.StudentId == 0)
-<<<<<<< HEAD
+//
             {
                 await _studentRepository.AddAsync(model);
                 TempData["Success"] = "Student created successfully!";
@@ -264,7 +264,7 @@ namespace COLLEGE.Controllers
             if (!result)
                 return NotFound();
 
-<<<<<<< HEAD
+//
             return RedirectToAction(nameof(Index1));
         }
 

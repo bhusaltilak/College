@@ -60,7 +60,7 @@ namespace COLLEGE.Migrations
                     b.Property<int>("ParentId")
                         .HasColumnType("int");
 
-<<<<<<< HEAD
+//
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -118,7 +118,7 @@ namespace COLLEGE.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TeacherId"));
 
-<<<<<<< HEAD
+//
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 

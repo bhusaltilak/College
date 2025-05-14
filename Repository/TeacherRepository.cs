@@ -20,7 +20,7 @@ namespace COLLEGE.Repository
         public async Task<IEnumerable<TeacherViewModel>> GetAllAsync()
         {
             return await _context.Teachers
-                .Where(t=>t.Status==true)
+                .Where(t => t.Status == true)
             .Select(t => new TeacherViewModel
 =======
         public async Task<IEnumerable<DetailsViewModel>> GetAllAsync()
@@ -38,7 +38,7 @@ namespace COLLEGE.Repository
 =======
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
                 Status = true,
-               
+
             })
             .ToListAsync();
         }
@@ -66,7 +66,7 @@ namespace COLLEGE.Repository
 =======
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
                     Status = t.Status,
-                  
+
                 })
                 .FirstOrDefaultAsync();
         }
@@ -108,7 +108,7 @@ namespace COLLEGE.Repository
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
         {
             var teacher = await _context.Teachers.FindAsync(model.TeacherId);
-            if (teacher == null || teacher.Status==false) return false;
+            if (teacher == null || teacher.Status == false) return false;
 
             teacher.TeacherName = model.TeacherName;
             teacher.Subject = model.Subject;
@@ -122,7 +122,7 @@ namespace COLLEGE.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-       public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(int id)
         {
 
 
@@ -134,7 +134,7 @@ namespace COLLEGE.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-            
+
 
 
     }

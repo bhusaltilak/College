@@ -1,7 +1,7 @@
 ﻿using COLLEGE.Models.DbEntities;
 using COLLEGE.Models.ViewModels;
 using COLLEGE.Repository;
-<<<<<<< HEAD
+//
 using Microsoft.AspNetCore.Hosting;
 =======
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
@@ -12,7 +12,7 @@ namespace COLLEGE.Controllers
     public class TeacherController : Controller
     {
         private readonly ITeacherRepository _teacherRepository;
-<<<<<<< HEAD
+//
         private readonly IWebHostEnvironment _webHostEnvironment;
 
         public TeacherController(ITeacherRepository teacherRepository, IWebHostEnvironment webHostEnvironment)
@@ -31,7 +31,7 @@ namespace COLLEGE.Controllers
         public async Task<IActionResult> Index()
         {
             var teachers = await _teacherRepository.GetAllAsync();
-<<<<<<< HEAD
+//
             ViewBag.IsAdmin = HttpContext.Session.GetString("IsAdmin") == "true";
 =======
 >>>>>>> 5572f4de444e80214a0e803bd53aa8e9f592e0f5
@@ -50,7 +50,7 @@ namespace COLLEGE.Controllers
         [HttpGet]
         public async Task<IActionResult> CreateEdit(int? id)
         {
-<<<<<<< HEAD
+//
             if (HttpContext.Session.GetString("IsAdmin") != "true")
                 return Unauthorized();
 
@@ -150,7 +150,7 @@ namespace COLLEGE.Controllers
                 return NotFound();
 
             TempData["Success"] = "Teacher deleted successfully!";
-<<<<<<< HEAD
+//
             return RedirectToAction("Index");
 =======
             return RedirectToAction(nameof(Index));
